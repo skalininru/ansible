@@ -37,4 +37,4 @@ web1.example.com nginx_hostname=web1.example.com
     - php-fpm
 ```
 
-This role installs and configure PHP application server
+This playbook installs and configure PHP application server
