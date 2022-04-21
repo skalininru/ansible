@@ -1,0 +1,22 @@
+---
+
+- name: "Add remi repo rpm key"
+  rpm_key:
+    key: https://rpms.remirepo.net/RPM-GPG-KEY-remi2018
+    state: present
+
+- name: "Installing remi repository"
+  dnf:
+    name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+    state: present
+    update_cache: yes
+
+- name: "Enable remi-php repo"
+  shell:
+    cmd: dnf module reset -y php && dnf module enable -y php:remi-7.4
+
+- name: "Install php-fpm"
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ php_packages }}"

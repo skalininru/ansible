@@ -1,0 +1,8 @@
+packages:
+  - iptables-persistent
+  - vim
+  - htop
+  - git
+  - bash-completion
+  - curl
+iptables_config_path: "/etc/iptables/rules.v4"

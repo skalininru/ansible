@@ -1,0 +1,40 @@
+---
+
+- name: "Disable ssh password authentication"
+  lineinfile:
+    path: "{{ sshd_config_path }}"
+    regexp: "PasswordAuthentication yes"
+    line: "PasswordAuthentication no"
+    state: present
+
+- name: "Disable root login"
+  lineinfile:
+    path: "{{ sshd_config_path }}"
+    regexp: "PermitRootLogin yes"
+    line: "PermitRootLogin no"
+    state: present
+
+- name: "Create user accounts"
+  user:
+    name: "{{ item.key }}"
+  with_dict: "{{ ssh_users }}"
+
+- name: "Set authorized keys for users"
+  authorized_key:
+    user: "{{ item.key }}"
+    state: present
+    key: "{{ item.value.ssh_pub_key }}"
+    key_options: 'from="{{ item.value.ip_address_list }}"'
+  with_dict: "{{ ssh_users }}"
+
+- name: "Configure allowed ssh users"
+  lineinfile:
+    path: "{{ sshd_config_path }}"
+    regexp: "AllowUsers"
+    line: "AllowUsers {{ allowed_users }}"
+    state: present
+
+- name: "Restart sshd"
+  service: 
+    name: sshd
+    state: restarted

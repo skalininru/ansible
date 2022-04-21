@@ -1,0 +1,8 @@
+packages:
+  - iptables-services
+  - vim
+  - htop
+  - git
+  - bash-completion
+  - curl
+iptables_config_path: "/etc/sysconfig/iptables"

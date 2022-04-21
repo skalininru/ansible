@@ -1,0 +1,11 @@
+---
+
+php_packages:
+  - php
+  - php-fpm
+
+php_ini_configs:
+  - param: post_max_size
+    value: 20M
+  - param: upload_max_filesize
+    value: 20M

@@ -1,0 +1,12 @@
+---
+
+
+- name: PHP Application Server Setup
+  hosts: all
+  become: yes
+
+  roles:
+    - base
+    - sshd
+    - nginx
+    - php-fpm

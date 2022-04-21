@@ -1,0 +1,6 @@
+---
+
+php_ini_path: "/etc/php/7.4/fpm/php.ini"
+www_conf_path: "/etc/php/7.4/fpm/pool.d/www.conf"
+php_service_name: "php7.4-fpm"
+php_amqp_package: "php-amqp"

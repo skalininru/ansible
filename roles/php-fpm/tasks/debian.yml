@@ -1,0 +1,12 @@
+---
+
+- name: "Update apt cache"
+  apt:
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: "Installing php-fpm"
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ php_packages }}"

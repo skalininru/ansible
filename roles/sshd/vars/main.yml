@@ -1,0 +1,14 @@
+---
+
+sshd_config_path: "/etc/ssh/sshd_config"
+ssh_users:
+  alex:
+    ip_address_list: "127.0.0.1,127.0.0.2"
+    ssh_pub_key: "ssh-rsa AAABBBCCC"
+  denys:
+    ip_address_list: "127.0.0.3,127.0.0.4"
+    ssh_pub_key: "ssh-rsa AAAABBBBCCCC"
+  ansible:
+    ip_address_list: "*"
+    ssh_pub_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2hrxORrvDtVh8crSOngaknpe2oUL9w+/n+g8aZq+ctmAopNB40qVz3qW08riqPah+0UACPeCAcOKAe3yC0WxwbCT2LKxHZ/v/XMuvND+c8lZYNrx6onf1WKpdvZluCL+TlLTqNBkHmTzG8YSZf77Ttm6n8W7oWqVrQHDNgq7PA4pFUm/Jd0k/sTuefywG+Q+rIRPT7js2r686sAojzGqyIGikq2hbestyy5hg379MQ8o8lCG2jp6Dg9lnFuETw5yzg1T2CNidk0HSDllLdWE/7BRTQt3iNrwMWYAImqQwFNFAgkike94YeRA3gvVRFgVfUlcLJRMp3yk6OWTBwnS7mfc/kp4EJrccMNIitUNlaZF9Ev3GwAgKB23Ow2LmBEOvJs9g0NSUNJaLyFVR2OuUQoydGPBHe96A11YTWuKfk0fhJ8mW9uhGPGYd1IJFVX1CHWoO5Q0VuurZ8etEbNpTwqgrPkuwU1H2AN2KEP3w2rYlmo9Kx9xzOHVcySOnypnA8UzSmqSaDJj+0/9XtxkpKgEZEMIsZc1azwdw+VqrACc0cwucLp2DYR8mL3ONHgwrOcI9IpYk194NEW79cBVt3L7Y1lYeRz7KZaF3uH12CFy10+JBBzuiyFDsxeOkiIuLMV92fZul0MOS+O01AhbqB5yWUhjB9nWXBPY5q5R+qQ== skalinin.info@gmail.com"
+allowed_users: "alex denys ansible"

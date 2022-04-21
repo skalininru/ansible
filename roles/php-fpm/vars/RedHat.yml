@@ -1,0 +1,6 @@
+---
+
+php_ini_path: "/etc/php.ini"
+www_conf_path: "/etc/php-fpm.d/www.conf"
+php_service_name: "php-fpm"
+php_amqp_package: "php74-php-pecl-amqp"

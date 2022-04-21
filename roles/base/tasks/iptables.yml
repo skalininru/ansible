@@ -1,0 +1,20 @@
+---
+
+- name: "Get allowed ip list"
+  set_fact:
+    ip_white_list: "{{ ip_white_list|default([]) + [item] }}"
+  loop: "{{ lookup('url', 'https://www.cloudflare.com/ips-v4', wantlist=True) }}"
+
+- debug:
+    msg: "{{ ip_white_list }}"
+
+- name: "Configure iptables"
+  template:
+    src: iptables.j2
+    dest: "{{ iptables_config_path }}"
+    mode: "0600"
+
+- name: "Reload iptables service"
+  service:
+    name: iptables
+    state: restarted

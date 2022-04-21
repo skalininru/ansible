@@ -1,0 +1,3 @@
+nginx_hostname: example.com
+phpfpm_port: 9000
+phpfpm_host: 127.0.0.1

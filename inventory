@@ -1,0 +1,3 @@
+# Example inventory file
+task1.skalinin.ru nginx_hostname=task1.skalinin.ru
+task1-d.skalinin.ru nginx_hostname=task1-d.skalinin.ru

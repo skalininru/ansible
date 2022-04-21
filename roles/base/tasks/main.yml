@@ -1,0 +1,25 @@
+---
+
+- name: "Set OS dependent variables"
+  include_vars:
+    file: "{{ ansible_os_family }}.yml"
+
+- name: "Install epel-release"
+  yum:
+    name: epel-release
+    update_cache: yes
+  when: ansible_os_family == "RedHat"
+
+- name: "Install base software"
+  package:
+    name: "{{ item }}"
+  with_items: "{{ packages }}"
+
+- name: "Enable iptables service"
+  service:
+    name: iptables
+    state: started
+    enabled: yes
+
+- include_tasks: iptables.yml
+

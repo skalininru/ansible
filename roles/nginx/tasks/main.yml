@@ -1,0 +1,40 @@
+---
+
+- name: "Set OS dependent variables"
+  include_vars:
+    file: "{{ ansible_os_family }}.yml"
+
+- name: "Install Nginx"
+  package:
+    name: nginx
+    state: latest
+
+- name: "Start and enable NGINX"
+  service: 
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: "Create virtualhost root directory"
+  file:
+    path: "/var/www/{{ nginx_hostname }}"
+    owner: "{{ nginx_user }}"
+    group: "{{ nginx_user }}"
+    mode: "0755"
+    state: directory
+
+- name: "Replace nginx.conf"
+  template:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+    mode: "0644"
+  notify:
+    - reload nginx
+
+- name: "Add virtualhost config"
+  template:
+    src: virtualhost.conf
+    dest: "/etc/nginx/conf.d/{{ nginx_hostname }}.conf"
+    mode: "0644"
+  notify:
+    - reload nginx
