@@ -1,0 +1,8 @@
+---
+
+- name: "Install PostgreSQL"
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: "{{ pg_packages }}"

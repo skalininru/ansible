@@ -1,0 +1,7 @@
+[Interface]
+PrivateKey = {{ wg_private_key }}
+Address = {{ wg_network }}
+SaveConfig = true
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ server_network_interface }} -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ server_network_interface }} -j MASQUERADE
+ListenPort = 51820

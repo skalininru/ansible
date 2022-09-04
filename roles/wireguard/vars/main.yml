@@ -1,0 +1,4 @@
+---
+wg_interface: wg0
+wg_network: 10.0.0.1/24
+server_network_interface: ens3

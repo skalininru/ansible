@@ -1,0 +1,5 @@
+---
+pg_packages:
+  - postgresql
+  - postgresql-contrib
+  - libpq-dev

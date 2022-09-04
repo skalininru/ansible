@@ -1,0 +1,63 @@
+---
+
+- name: "Install wireguard"
+  apt:
+    name: wireguard
+    state: present
+    update_cache: yes
+
+- name: "Enable ip forwarding"
+  sysctl:
+      name: net.ipv4.ip_forward
+      value: "1"
+      state: present
+      sysctl_set: yes
+      reload: yes
+
+- name: "Generate private key"
+  command: "wg genkey"
+  register: wg__register_private_key
+
+- name: "Set private key fact"
+  set_fact:
+    wg_private_key: "{{ wg__register_private_key.stdout }}"
+
+- name: "Generate public key"
+  command: "wg pubkey"
+  args:
+    stdin: "{{ wg_private_key }}"
+  register: wg__register_public_key
+
+- name: "Set public key fact"
+  set_fact:
+    wg_public_key: "{{ wg__register_public_key.stdout }}"
+
+- name: "Save private key"
+  copy:
+    content: "{{ wg_private_key }}"
+    dest: /etc/wireguard/privatekey
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: "Save public key"
+  copy:
+    content: "{{ wg_public_key }}"
+    dest: /etc/wireguard/publickey
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: "Generate WireGuard configuration file"
+  template:
+    src: wg0.conf.j2
+    dest: /etc/wireguard/wg0.conf
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: "Start and enable WireGuard service"
+  service:
+    name: wg-quick@wg0
+    state: started
+    enabled: yes
